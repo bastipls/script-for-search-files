@@ -36,12 +36,15 @@ class GeneralMenu:
                 print('{0} <-- No es una eleccion valida '.format(choice))
 
     def search_file(self):
-        path = self.color.green("Paste your path:: ",is_input=True,center=False)
-        extension = str('.'+self.color.green("Extension to find ex: js (blank for anyone): ",is_input=True,center=False))
+        path = str(self.color.green("Paste your path:: ",is_input=True,center=False))
+      
+        extension = str("."+self.color.green("Extension to find ex: js (blank for anyone): ",is_input=True,center=False))
 
         # 
-        my_index = 0
-        search = self.color.green("Write the exact word to search: ",is_input=True,center=False)
+        print(extension)
+        
+        search = str(self.color.green("Write the exact word to search: ",is_input=True,center=False))
+        print(search)
         listOfFiles = list()
         for i,(dirpath, dirnames, filenames) in enumerate(os.walk(path)):
             listOfFiles += [os.path.join(dirpath, file) for file in filenames]
@@ -49,23 +52,19 @@ class GeneralMenu:
         if len(extension)<2:
             self.color.yellow("Maybe some files can't be read")
             time.sleep(5) 
+        print(len(extension))
         for i in range(1,len(listOfFiles)):       
-            # line.rstrip()
+           
             try:
                 if len(extension) > 1:
                     if listOfFiles[i].endswith(extension):
+                        
                         js = open(listOfFiles[i], "r", encoding="utf8").readlines()
+                        self.scan_file(listOfFiles,i,js,search)
                 else:
                     
                     js = open(listOfFiles[i], "r", encoding="utf8").readlines()
-                for index,line in enumerate(js):
-                    if search in line:
-                    
-                        my_index = my_index + 1
-                        path_file = listOfFiles[i]
-                        fecha_archivo = datetime.datetime.today().strftime('%Y_%m_%d_%H_%M')
-                        with open(f'{fecha_archivo}_out.txt','a') as file_txt:
-                            file_txt.write(f"{my_index}  {line.split()[1]} LINE:{index +1} --> src{path_file}\n")
+                    self.scan_file(listOfFiles,i,js,search)
                     
                         
                      
@@ -77,10 +76,29 @@ class GeneralMenu:
                 
                 self.logger.error(f"ExecptionType: {exception_type} FILE: {filename} LINE:{ line_number }  {e}")
 
-        with open('out.txt','a') as file_txt:
-            file_txt.write(f"FILES ANALIZED {len(listOfFiles)}")
+                       
+        
         print("FILES ANALIZED",len(listOfFiles))
-
+    def scan_file(self,path_file,i,file,word):
+        try:
+            my_index = 0
+            fecha_archivo = datetime.datetime.today().strftime('%Y_%m_%d_%H_%M')
+            for index,line in enumerate(file):
+                if word in line:
+                
+                    my_index = my_index + 1
+                    path_file = path_file[i]
+                    
+                    print(f"  {line.split()[1]} LINE:{index +1} --> src{path_file}\n")
+                    with open(f'{fecha_archivo}_out.txt','a') as file_txt:
+                        file_txt.write(f"{line.split()[1]} LINE:{index +1} --> src{path_file}\n")
+            # with open(f'{fecha_archivo}_out.txt','a') as file_txt:
+            #     file_txt.write(f"FILES ANALIZED {len(path_file)}")
+        except Exception as e:   
+                exception_type, exception_object, exception_traceback = sys.exc_info()
+                filename = exception_traceback.tb_frame.f_code.co_filename
+                line_number = exception_traceback.tb_lineno           
+                self.logger.error(f"ExecptionType: {exception_type} FILE: {filename} LINE:{ line_number }  {e}")
                     
         
 

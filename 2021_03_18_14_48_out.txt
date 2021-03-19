@@ -1,0 +1,1 @@
+UserError(_('El LINE:269 --> srcC:\Users\Usuario Apiux\addons_custom\l10n_cl_fe\models\res_partner.py

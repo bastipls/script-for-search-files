@@ -1,0 +1,10 @@
+= LINE:14 --> srcC:\Users\Usuario Apiux\addons\account_cost_center\tests\test_cost_center.py
+'group_id', LINE:11 --> srcC:\Users\Usuario Apiux\addons\account_group_menu\models\account_group.py
+= LINE:35 --> srcC:\Users\Usuario Apiux\addons\account_sector\account.py
+= LINE:8 --> srcC:\Users\Usuario Apiux\addons\account_tag_menu\models\account_tag.py
+request.env.ref('account.account_invoices').sudo().render_qweb_pdf([document.id])[0] LINE:47 --> srcC:\Users\Usuario Apiux\addons\l10n_cl_fe\controllers\boleta.py
+self.env.ref('account.account_invoices').report_action(self) LINE:2115 --> srcC:\Users\Usuario Apiux\addons\l10n_cl_fe\models\invoice.py
+= LINE:97 --> srcC:\Users\Usuario Apiux\addons\l10n_cl_financial_reports\balance_tabular.py
+= LINE:128 --> srcC:\Users\Usuario Apiux\addons\l10n_cl_financial_reports\estado_resultado.py
+= LINE:9 --> srcC:\Users\Usuario Apiux\addons\sync_fiscal_year\models\account.py
+= LINE:34 --> srcC:\Users\Usuario Apiux\addons\sync_fiscal_year\wizard\account_fiscalyear_close.py
